@@ -1,0 +1,13 @@
+{
+    "name": "docforge/framework",
+    "version": "0.0.15",
+    "autoload": {
+        "psr-4": {
+            "DocForge\\Framework\\": "src/"
+        }
+    },
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "webmozart/glob": "^4.1"
+    }
+}
