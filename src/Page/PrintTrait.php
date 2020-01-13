@@ -11,7 +11,7 @@
  * @license   -
  */
 
-namespace Javanile\DocForge\Page;
+namespace DocForge\Framework\Page;
 
 trait PrintTrait
 {

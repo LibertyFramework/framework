@@ -11,7 +11,7 @@
  * @license   -
  */
 
-namespace Javanile\DocForge;
+namespace DocForge\Framework;
 
 class Functions
 {

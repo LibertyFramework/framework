@@ -1,13 +1,25 @@
 {
-    "name": "docforge/framework",
-    "version": "0.0.15",
-    "autoload": {
-        "psr-4": {
-            "DocForge\\Framework\\": "src/"
-        }
-    },
-    "require": {
-        "erusev/parsedown": "^1.7",
-        "webmozart/glob": "^4.1"
+  "name": "docforge/framework",
+  "version": "0.0.15",
+  "scripts": {
+    "build": "php build.php vendor/docforge/handbook",
+    "serve": "php -S localhost:8080 -t vendor/docforge/handbook/public"
+  },
+  "autoload": {
+    "psr-4": {
+      "DocForge\\Framework\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DocForge\\Framework\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "erusev/parsedown": "^1.7",
+    "webmozart/glob": "^4.1"
+  },
+  "require-dev": {
+    "docforge/handbook": "dev-master"
+  }
 }

@@ -11,11 +11,11 @@
  * @license   -
  */
 
-namespace Javanile\DocForge\Scope;
+namespace DocForge\Framework\Scope;
 
-use Javanile\DocForge\Functions;
-use Javanile\DocForge\Page;
-use Javanile\DocForge\Page404;
+use DocForge\Framework\Functions;
+use DocForge\Framework\Page;
+use DocForge\Framework\Page404;
 
 trait PageTrait
 {
@@ -42,7 +42,8 @@ trait PageTrait
             return $pages;
         }
 
-        $firstValue = array_pop(array_reverse($pages));
+        $pagesReverse = array_reverse($pages);
+        $firstValue = array_pop($pagesReverse);
         $firstKey = array_keys($pages)[0];
         $slug = $slug.'/'.$firstKey;
 

@@ -11,7 +11,7 @@ Producer::addPsr4([
     'Javanile\Elegy\\Tests\\' => __DIR__,
 ]);
 
-final class ElegyTest extends TestCase
+final class PageTest extends TestCase
 {
     public function testCreateAnInstance()
     {

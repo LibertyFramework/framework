@@ -11,7 +11,7 @@
  * @license   -
  */
 
-namespace Javanile\DocForge;
+namespace DocForge\Framework;
 
 abstract class Scope
 {
@@ -19,13 +19,6 @@ abstract class Scope
     use Scope\PageTrait;
     use Scope\PagesTrait;
     use Scope\TemplatesTrait;
-
-    /**
-     * Configuration filename.
-     *
-     * @var string
-     */
-    protected $configFile;
 
     /**
      * Configuration filename.
@@ -49,13 +42,10 @@ abstract class Scope
      *
      * @param $configFile
      */
-    public function __construct($configFile)
+    public function __construct($config, $theme)
     {
-        $this->configFile = $configFile;
-        $this->config = json_decode(file_get_contents($configFile), true);
-        $this->workingDir = dirname($configFile);
-
-        $this->templatesDir = dirname($configFile) . '/templates';
+        $this->config = $config;
+        $this->templatesDir = $theme . '/templates';
     }
 
     /**
@@ -71,7 +61,7 @@ abstract class Scope
      */
     public function getAuthor()
     {
-        return $this->config['author'] ?: 'someone';
+        return isset($this->config['author']) ? $this->config['author'] : 'someone';
     }
 
     /**

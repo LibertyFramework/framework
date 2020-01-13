@@ -11,11 +11,11 @@
  * @license   -
  */
 
-namespace Javanile\DocForge\Scope;
+namespace DocForge\Framework\Scope;
 
-use Javanile\DocForge\Functions;
-use Javanile\DocForge\Page;
-use Javanile\DocForge\Page404;
+use DocForge\Framework\Functions;
+use DocForge\Framework\Page;
+use DocForge\Framework\Page404;
 use Webmozart\Glob\Glob;
 use Webmozart\PathUtil\Path;
 
@@ -404,9 +404,9 @@ trait PagesTrait
     {
         foreach ($struct as $key => $item) {
             if (is_array($item)) {
-                $this->listAllPagesRecursive($item, $pages, $base.$id.'/');
+                $this->listAllPagesRecursive($item, $pages, $base.$key.'/');
             } else {
-                $pages[] = $this->buildPage($item, $base.$id);
+                $pages[] = $this->buildPage($item, $base.$key);
             }
         }
     }

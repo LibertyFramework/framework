@@ -11,7 +11,7 @@
  * @license   -
  */
 
-namespace Javanile\DocForge;
+namespace DocForge\Framework;
 
 class Page
 {
@@ -185,7 +185,7 @@ class Page
      */
     public function getLabel()
     {
-        return $this->label ?: $this->name;
+        return isset($this->label) ? $this->label : $this->name;
     }
 
     /**
@@ -193,6 +193,6 @@ class Page
      */
     public function getMenuLabel()
     {
-        return $this->menuLabel ?: $this->getLabel();
+        return isset($this->menuLabel) ? $this->menuLabel : $this->getLabel();
     }
 }
