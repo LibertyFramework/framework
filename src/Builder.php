@@ -13,6 +13,8 @@
 
 namespace DocForge\Framework;
 
+use Gajus\Dindent\Indenter;
+
 class Builder extends Scope
 {
     /**
@@ -47,6 +49,8 @@ class Builder extends Scope
      */
     public function run()
     {
+        $indenter = new Indenter(['indentation_character' => '  ']);
+
         // Build HTML files
         foreach ($this->listAllPages() as $page) {
             $this->setCurrentPage($page);
@@ -54,7 +58,10 @@ class Builder extends Scope
             if (!is_dir(dirname($pageFile))) {
                 mkdir(dirname($pageFile), 0777, true);
             }
-            file_put_contents($pageFile, $page->renderize());
+            $html = $page->renderize();
+            $html = $indenter->indent($html);
+
+            file_put_contents($pageFile, $html);
         }
 
         // Copy Assests
