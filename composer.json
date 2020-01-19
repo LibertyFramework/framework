@@ -1,6 +1,18 @@
 {
   "name": "docforge/framework",
   "version": "0.0.15",
+  "description": "Produce your vendor code everywhere",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Francesco Bianco",
+      "email": "bianco@javanile.org"
+    }
+  ],
+  "config": {
+    "process-timeout": 0
+  },
   "scripts": {
     "build:docs": "php build_docs.php vendor/docforge/handbook",
     "serve": "php -S localhost:8080 -t vendor/docforge/handbook/public"

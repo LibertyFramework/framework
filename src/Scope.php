@@ -103,4 +103,12 @@ abstract class Scope
     {
         return isset($this->config['source']) ? $this->workingDir.'/'.$this->config['source'] : $this->workingDir;
     }
+
+    /**
+     *
+     */
+    public function getStyleCss()
+    {
+        return 'css/style.css';
+    }
 }

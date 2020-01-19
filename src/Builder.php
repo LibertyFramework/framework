@@ -37,6 +37,7 @@ class Builder extends Scope
     public function __construct($config, $theme)
     {
         $this->config = $config;
+        $this->publicDir = $theme . '/public';
         $this->templatesDir = $theme . '/templates';
         $this->buildDir = isset($this->config['output']) ? $this->config['output'] : 'build';
     }
@@ -57,6 +58,13 @@ class Builder extends Scope
         }
 
         // Copy Assests
+        foreach ($this->assets as $assetDir => $extensions) {
+            static::assetCopy(
+                $this->publicDir.'/'.$assetDir,
+                $this->buildDir.'/'.$assetDir,
+                $extensions
+            );
+        }
     }
 
     /**
@@ -74,16 +82,20 @@ class Builder extends Scope
      * @param $src
      * @param $dst
      */
-    function deepCopy($src, $dst)
+    public static function assetCopy($source, $target, $extensions)
     {
-        $dir = opendir($src);
-        @mkdir($dst);
+        $dir = opendir($source);
+
+        if (!is_dir($target)) {
+            mkdir($target, 0777, true);
+        }
+
         while (($file = readdir($dir))) {
             if (($file != '.') && ($file != '..')) {
-                if (is_dir($src . '/' . $file)) {
-                    deepCopy($src .'/'. $file, $dst .'/'. $file);
+                if (is_dir($source . '/' . $file)) {
+                    self::assetCopy($source .'/'. $file, $target .'/'. $file, $extensions);
                 } else {
-                    copy($src .'/'. $file,$dst .'/'. $file);
+                    copy($source .'/'. $file, $target .'/'. $file);
                 }
             }
         }
