@@ -16,6 +16,7 @@ return [
     'namespace' => 'DocForge\\Framework',
     'pages' => [
         'index' => 'Page',
+        'license' => 'LICENSE',
         'page1' => [
             'index' => 'Page',
             'page2' => 'Page',
@@ -25,5 +26,6 @@ return [
             'classes' => 'src/**/*.php'
         ],
     ],
-    'output' => 'docs'
+    'source' => __DIR__,
+    'output' => 'docs',
 ];

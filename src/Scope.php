@@ -46,6 +46,7 @@ abstract class Scope
     {
         $this->config = $config;
         $this->templatesDir = $theme . '/templates';
+        $this->path = isset($config['path']) ? $config['path'] : getcwd();
     }
 
     /**
@@ -87,12 +88,30 @@ abstract class Scope
     }
 
     /**
+     * @param $class
+     * @return string
+     */
+    public function isSourceFile($file)
+    {
+        return file_exists($this->getSourceFile($file));
+    }
+
+    /**
      * @param string $path
      * @return string
      */
     public function getWorkingDir($path = '')
     {
         return $this->workingDir.'/'.$path;
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    public function getSourceFile($file)
+    {
+        return $this->getSourceDir() . '/' . $file;
     }
 
     /**
@@ -109,6 +128,8 @@ abstract class Scope
      */
     public function getStyleCss()
     {
-        return 'css/style.css';
+        $depth = $this->getCurrentPage()->getDepth();
+
+        return str_repeat('../', $depth) . 'css/style.css';
     }
 }

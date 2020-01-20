@@ -38,6 +38,13 @@ class Page
     protected $slug;
 
     /**
+     * Depth of page in directory strucure (0 for root file, +1 for each sub-directory).
+     *
+     * @var integer
+     */
+    protected $depth;
+
+    /**
      * Constructor.
      */
     public function __construct($scope, $node, $slug = null)
@@ -49,6 +56,7 @@ class Page
         $this->scope = $scope;
         $this->node = $node;
         $this->slug = $slug;
+        $this->depth = substr_count($slug, '/');
         $this->name = $this->node != 'index' ? ucwords(basename($this->node)) : 'Home';
     }
 
@@ -74,6 +82,14 @@ class Page
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepth()
+    {
+        return $this->depth;
     }
 
     /**
@@ -177,7 +193,9 @@ class Page
      */
     public function getUrl()
     {
-        return '/'.$this->slug.'.html';
+        $depth = $this->scope->getCurrentPage()->getDepth();
+
+        return str_repeat('../', $depth) . $this->slug.'.html';
     }
 
     /**

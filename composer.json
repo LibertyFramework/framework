@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build:docs": "php build_docs.php vendor/docforge/handbook",
-    "serve": "php -S localhost:8080 -t vendor/docforge/handbook/public"
+    "serve": "php -S localhost:8080 -t vendor/docforge/handbook/public ../serve.php"
   },
   "autoload": {
     "psr-4": {

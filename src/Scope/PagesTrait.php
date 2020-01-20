@@ -13,6 +13,7 @@
 
 namespace DocForge\Framework\Scope;
 
+use DocForge\Framework\Exception\PagesConfigException;
 use DocForge\Framework\Functions;
 use DocForge\Framework\Page;
 use DocForge\Framework\Page404;
@@ -57,13 +58,15 @@ trait PagesTrait
 
         $pages = $this->getPages();
         foreach (explode('/', $node) as $token) {
-            $pages = isset($pages[$token]) ? $pages[$token] : null;
+            $pages = isset($pages[$token]) ? $pages[$token] : [];
         }
 
         return $this->setCache(__METHOD__, $node, $pages);
     }
 
     /**
+     * Get pages from config data.
+     *
      * @return array
      */
     public function getPages()
@@ -94,7 +97,7 @@ trait PagesTrait
     }
 
     /**
-     *
+     * Fill the array $pages with valid based on $key as slug $value of page source.
      */
     public function fillPagesArray(&$pages, $key, $value)
     {
@@ -110,11 +113,15 @@ trait PagesTrait
             return $pages = array_merge($pages, $this->getPagesByGlob($value));
         } elseif (Functions::isSlug($key) && Functions::isGlob($value)) {
             return $pages = array_merge($pages, [$key => $this->getPagesByGlob($value)]);
+        } elseif (Functions::isSlug($key) && $this->isSourceFile($value)) {
+            return $pages = array_merge($pages, [$key => $this->getClassName($value)]);
         } elseif (Functions::isSlug($key) && $this->isClassName($value)) {
             return $pages = array_merge($pages, [$key => $this->getClassName($value)]);
         }
 
-        die('Error on "pages" block at: '.json_encode([$key => $value]));
+        throw new PagesConfigException(
+            'Pages config "'.$key.'" => "'.$value.'" not match any of Class, File or Glob.'
+        );
     }
 
     /**
