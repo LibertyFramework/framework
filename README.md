@@ -1,7 +1,6 @@
-# framework
-
 ### This project is deprecated (visit: https://github.com/javanile/handbook)
 
+# framework
 
 [![Build Status](https://travis-ci.org/docforge/framework.svg?branch=master)](https://travis-ci.org/docforge/framework)
 [![codecov](https://codecov.io/gh/docforge/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/docforge/framework)
